@@ -1,4 +1,5 @@
 import CarCard from './CarCard';
+import CardDetails from './CardDetails';
 import CustomButton from './CustomButton';
 import CustomFilter from './CustomFilter';
 import Footer from './Footer';
@@ -6,6 +7,17 @@ import Hero from './Hero';
 import Navbar from './Navbar';
 import SearchBar from './SearchBar';
 import SearchManufacturer from './SearchManufacturer';
-import CardDetails from './CardDetails';
+import ShowMore from './ShowMore';
 
-export { Hero, CustomButton, Footer, Navbar, SearchBar, CustomFilter, CarCard, CardDetails, SearchManufacturer };
+export {
+  CarCard,
+  CardDetails,
+  CustomButton,
+  CustomFilter,
+  Footer,
+  Hero,
+  Navbar,
+  SearchBar,
+  SearchManufacturer,
+  ShowMore,
+};

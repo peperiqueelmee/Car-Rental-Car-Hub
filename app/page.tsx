@@ -1,8 +1,9 @@
-import { CarCard, CustomFilter, Hero, SearchBar } from '@/components';
+import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from '@/components';
 import { fuels, yearsOfProduction } from '@/constants';
+import { HomeProps } from '@/types';
 import { fetchCars } from '@/utils';
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || '',
     year: searchParams.year || 2022,
@@ -20,7 +21,7 @@ export default async function Home({ searchParams }) {
         className='mt-12 padding-x padding-y max-width'
         id='discover'>
         <div className='home__text-container'>
-          <h1 className='text-4xl font-extrabold'></h1>
+          <h1 className='text-4xl font-extrabold'>Car Catalogue</h1>
           <p>Explore the car you might like</p>
         </div>
 
@@ -28,8 +29,14 @@ export default async function Home({ searchParams }) {
           <SearchBar />
 
           <div className='home__filter-container'>
-            <CustomFilter title='fuel' options={fuels} />
-            <CustomFilter title='year' options={yearsOfProduction} />
+            <CustomFilter
+              title='fuel'
+              options={fuels}
+            />
+            <CustomFilter
+              title='year'
+              options={yearsOfProduction}
+            />
           </div>
         </div>
 
@@ -37,13 +44,21 @@ export default async function Home({ searchParams }) {
           <section>
             <div className='home__cars-wrapper'>
               {allCars?.map(car => (
-                <CarCard car={car} />
+                <CarCard
+                  car={car}
+                  key={car.manufacturer}
+                />
               ))}
             </div>
+
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className='home__error-container'>
-            <h2 className='text-black text-xl font-bold'>Opps, no results</h2>
+            <h2 className='text-xl font-bold text-black'>Opps, no results</h2>
             <p>{allCars?.message}</p>
           </div>
         )}
